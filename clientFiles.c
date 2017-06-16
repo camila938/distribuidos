@@ -16,7 +16,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#define BUFFSIZE 1
+#define BUFFSIZE 19
 #define	ERROR	-1
 #define	PUERTO	1100
 
@@ -80,8 +80,8 @@ int main(int argc, char *argv[]){
 	printf("Se ha conectado con el servidor:%s\n",(char *)inet_ntoa(stSockAddr.sin_addr));
 	
 	printf("envia al servidor");
-	buffer = "hola soy el cliente\0"
-	if(send(SocketFD,buffer,20,0) == ERROR)
+	strcpy(buffer,"hola soy el cliente");
+	if(send(SocketFD,buffer,19,0) == ERROR)
 	     perror("Error al enviar el arvhivo:");
 	printf("enviado");
 	

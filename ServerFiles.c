@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
 	return 0;
 }//End main program
 
-void recibirPedidoArchivo(int SocketFD, char[] archivo){
+void recibirPedidoArchivo(int SocketFD, char * archivo){
 	char buffer[BUFFSIZE];
 	int recibido = -1;
 
@@ -113,8 +113,7 @@ void recibirPedidoArchivo(int SocketFD, char[] archivo){
 	
 	while((recibido = recv(SocketFD, buffer, BUFFSIZE, 0)) > 0){
 		printf("%s",buffer);
-		fwrite(buffer,sizeof(char),1,);
-		
+
 		char mensaje[80] = "Hola";
 		int lenMensaje = strlen(mensaje);
 		printf("\nConfirmación enviada\n");

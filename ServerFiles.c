@@ -103,6 +103,27 @@ int main(int argc, char *argv[]){
 	return 0;
 }//End main program
 
+void recibirPedidoArchivo(int SocketFD, char[] archivo){
+	char buffer[BUFFSIZE];
+	int recibido = -1;
+
+	/*Se abre el archivo para escritura*/
+	
+	while((recibido = recv(SocketFD, buffer, BUFFSIZE, 0)) > 0){
+		printf("%s",buffer);
+		fwrite(buffer,sizeof(char),1,);
+		
+		char mensaje[80] = "Hola";
+		int lenMensaje = strlen(mensaje);
+		printf("\nConfirmación enviada\n");
+		if(write(SocketFD,mensaje,sizeof(mensaje)) == ERROR)
+				perror("Error al enviar la confirmación:");
+
+	}//Termina la recepción del archivo	
+	
+}
+
+
 void recibirArchivo(int SocketFD, FILE *file){
 	char buffer[BUFFSIZE];
 	int recibido = -1;
@@ -111,6 +132,7 @@ void recibirArchivo(int SocketFD, FILE *file){
 	file = fopen("archivoRecibido","wb");
 	enviarConfirmacion(SocketFD);
 	enviarMD5SUM(SocketFD);
+	
 	while((recibido = recv(SocketFD, buffer, BUFFSIZE, 0)) > 0){
 		printf("%s",buffer);
 		fwrite(buffer,sizeof(char),1,file);

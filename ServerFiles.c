@@ -35,7 +35,7 @@ void getIP(int tipo, char * IP);
 int main(int argc, char *argv[]){
 	struct sockaddr_in stSockAddr;
     	struct sockaddr_in clSockAddr;
-	FILE *archivo;
+	char *archivo;
 	char *direccIP;
 	int SocketServerFD;
 	int SocketClientFD;

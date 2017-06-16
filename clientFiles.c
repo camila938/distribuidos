@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
 	char mensaje[80];
 	int totalBytesRcvd;
 	int bytesRcvd;
-	FILE *archivo;
+	char * archivo;
 	
 	if(argc < 3){
 		perror("USO:./clientFiles <archivo a enviar> <direccionIP del servidor>");
@@ -39,17 +39,13 @@ int main(int argc, char *argv[]){
 
 
 	/*Se abre el archivo a enviar*/
-	archivo = fopen(argv[1],"rb");
+	archivo = argv[1];
 
 	/*Se crea el socket*/
 	SocketFD = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	/*Se verifica la integridad del archivo*/
-	if(!archivo){
-		perror("Error al abrir el archivo:");
-		exit(EXIT_FAILURE);
-	}
-    
+	
 	/*Se verifica la integridad del socket*/
 	if (SocketFD == ERROR){
 		perror("cannot create socket");
@@ -82,23 +78,18 @@ int main(int argc, char *argv[]){
 	}
 
 	printf("Se ha conectado con el servidor:%s\n",(char *)inet_ntoa(stSockAddr.sin_addr));
-
-	/*Se envia el archivo*/
-	while(!feof(archivo)){
-		fread(buffer,sizeof(char),BUFFSIZE,archivo);
-		if(send(SocketFD,buffer,BUFFSIZE,0) == ERROR)
-			perror("Error al enviar el arvhivo:");
-	}
+	
+	printf("envia al servidor");
+	buffer = "hola soy el cliente\0"
+	if(send(SocketFD,buffer,20,0) == ERROR)
+	     perror("Error al enviar el arvhivo:");
+	printf("enviado");
 	
 	read(SocketFD,mensaje,sizeof(mensaje));
 	printf("\nConfirmación recibida:\n%s\n",mensaje);
 	
-	read(SocketFD,mensaje,sizeof(mensaje));
-	printf("\nMD5SUM:\n%s\n",mensaje);
-	
-	fclose(archivo);
 	close(SocketFD);
-
+	printf("fin");
 	return 0;
 }//End main
 

@@ -22,6 +22,7 @@
 #define ERROR		-1
 
 /*Prototipos de función*/
+void recibirPedidoArchivo(int SocketFD, char * archivo);
 void recibirArchivo(int SocketFD, FILE *file);
 void enviarConfirmacion(int SocketFD);
 void enviarMD5SUM(int SocketFD);
@@ -93,7 +94,8 @@ int main(int argc, char *argv[]){
 		printf("Cliente conectado: %s\n",inet_ntoa(clSockAddr.sin_addr));
 
 		/*Se recibe el archivo del cliente*/
-		recibirArchivo(SocketClientFD, archivo);
+		recibirPedidoArchivo(SocketClientFD, archivo);
+		//recibirArchivo(SocketClientFD, archivo);
 		
 
 	}//End infinity while

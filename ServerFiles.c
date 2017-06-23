@@ -1,12 +1,3 @@
-/*
-* Author: Pablo Camarillo Ramírez.
-* Fecha/Date: 28 de Septiembre de 2010/September 28th 2010.
-* Redes de Computadora / Computer networks.
-* Description: 	This application contains the server functionality
-* 		to send/receive files through C-like sockets by using
-*		TCP/UDP packages.
-*/
- 
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -28,7 +19,6 @@ void enviarConfirmacion(int SocketFD);
 void enviarMD5SUM(int SocketFD);
 void getIP(int tipo, char * IP);
 /*Recibe la clave de la interfaz que va a manejar:
- * lo : 0
  * wlan: 1
  * eth0: 2
 */
@@ -45,7 +35,7 @@ int main(int argc, char *argv[]){
 
 	/*Verifica que el número de parametros sea el correcto*/
 	if(argc < 2){
-		perror("Uso ./ServerFiles <clave de interfaz 0:lo 1:wlan 2:eth0>");
+		perror("Uso ./ServerFiles <clave de interfaz 1:wlan 2:eth0>");
 		exit(EXIT_FAILURE);	
 	}
 
@@ -174,9 +164,7 @@ void getIP(int tipo, char * IP){
 	char dIP2[20];
 	int i,j;
 	switch(tipo){
-		case 0:
-			system("ifconfig lo | grep inet > tmp");
-			break;
+		
 		case 1:
 			system("ifconfig wlan | grep inet > tmp");
 			break;
